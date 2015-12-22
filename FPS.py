@@ -293,7 +293,7 @@ def connect(device_name=None,baud=None,timeout=None,is_com=True):
 
 #BAUD = 115200
 BAUD = 9600
-
+#Here the class name should be NEC_HS100_10()
 class FPS_GT511C3(SerialCommander):
     _serial = None
     _lastResponse = None

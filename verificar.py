@@ -3,6 +3,7 @@ Created on 08/04/2014
 
 @author: jeanmachuca
 '''
+#Here also you should used verified.py not verificar.py
 import FPS, sys
 from test_raw import *
 

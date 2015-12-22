@@ -2,7 +2,7 @@ import FPS
 from PIL import Image, ImageEnhance
 import numpy as np
 FPS.BAUD = 115200
-
+# The English function name is depolirizedImage(image,image2,delta):
 def desplazarImagen(image,image2,delta):
     "Roll an image sideways"
     xsize, ysize = image.size
@@ -14,13 +14,13 @@ def desplazarImagen(image,image2,delta):
     image.paste(part1, (xsize-delta, 0, xsize, ysize))
     image.save(image2)
     return image
-
+# The English function name is cropImage():
 def cortarImagen(img, image2):
     img2 = img.crop((8,7,141,112)) # cuadro que solo contiene la huella sin borde
     img2.save(image2)
     return img2
 
-
+# The English function name is normalized():
 def normalize(arr):
     """
     Linear normalization
@@ -51,10 +51,11 @@ def rotateImage(img,image2):
     img = img.transpose(Image.ROTATE_270)
     img.save(image2)
     return img
-
+# The English function name is nearPixels():
 def pixelesVecinos(image,pixel):
     x = pixel[0]
     y = pixel[1]
+    # vecinos in English means neighbors but the right one is near
     vecinos = [(x-1,y-1),
                (x-1,y),
                (x-1,y+1),
@@ -63,18 +64,18 @@ def pixelesVecinos(image,pixel):
                (x+1,y),
                (x+1,y-1),
                (x,y-1)]
-    return [image.getpixel(v) for v in vecinos]
-
+    return [image.getpixel(v) for v in vecinos] # near not vecinos
+# The English function name is segmentation():
 def segmentacion(im,image2):
     im = im.point(lambda i: i*0.9 if i >=sum(list(im.getdata()))/(list(im.getdata()).__len__())  else 255)
     enh = ImageEnhance.Contrast(im)
     im = enh.enhance(1.2)
     im.save(image2)
     return im
-
+# The English function name is fork():
 def bifurcaciones(image,size):
-    bifurcacion = [0,0,255,0,0,255,0,255]
-    inicioFin =   [0,0,255,0,0,0,0,0]
+    bifurcacion = [0,0,255,0,0,255,0,255] #fork
+    inicioFin =   [0,0,255,0,0,0,0,0]  # The English means of inicioFin is startEnd:
     sizeX = size[0]-2
     sizeY = size[1]-2
     pixs = []
@@ -82,10 +83,10 @@ def bifurcaciones(image,size):
         for y in range (1,sizeY):
             pixs.append((x,y))
     return [1 if pixelesVecinos(image, (x1,y1) ) == bifurcacion else -1  for (x1,y1) in pixs]
-
+# The English function name is countForkedImage(image,image2,delta):
 def contarBifurcaciones(bifurcaciones):
     return sum(filter(lambda x: x==1, bifurcaciones))
-
+# The English function name is countNotForkedImage(image,image2,delta):
 def contarNoBifurcaciones(bifurcaciones):
     return sum(map(lambda m: -1*m,filter(lambda x: not x==1, bifurcaciones)))
 
